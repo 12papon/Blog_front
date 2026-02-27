@@ -17,13 +17,16 @@ export const AuthProvider = ({ children }) => {
 
   //Login
   const login = (userData) => {
+    console.log(userData);
     setUser(userData);
-    localStorage.setItem("blogUser", JSON.parse(userData));
+    localStorage.setItem("blogUser", JSON.stringify(userData));
+    return true;
   };
   //Logout
   const logout = () => {
     setUser(null);
     localStorage.removeItem("blogUser");
+    return false;
   };
 
   return (

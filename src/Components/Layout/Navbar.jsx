@@ -9,15 +9,18 @@ import {
   AiOutlineUser,
 } from "react-icons/ai";
 import { RiArrowDownSLine } from "react-icons/ri";
-import LoginPage from "../../pages/LoginPage";
 import { Link } from "react-router";
+import { useAuth } from "../../Context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // মোবাইল মেনু স্টেট
+  const { user } = useAuth();
+
   const [isProfileOpen, setIsProfileOpen] = useState(false); // প্রোফাইল ড্রপডাউন স্টেট
 
   // ইউজার লগইন করা আছে কি না তা চেক করার জন্য ডামি স্টেট (পরবর্তীতে আপনার Auth Logic বসাবেন)
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(user ? true : false);
+  console.log(isLoggedIn);
 
   const menuItems = [
     { name: "Home", icon: <AiOutlineHome />, link: "/" },

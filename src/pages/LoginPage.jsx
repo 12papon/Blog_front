@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineMail,
   AiOutlineLock,
@@ -9,11 +11,17 @@ import {
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, user } = useAuth();
+  const navigate = useNavigate();
+  console.log(user);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Login Attempt:", { email, password });
+
     // এখানে আপনার লগইন লজিক বা Firebase/Auth API কল করবেন
+    // login({ name: "papon", email: "RRRRR@gmail.com" });
+    navigate("/");
+    navigate("/", { replace: true });
   };
 
   return (
@@ -83,6 +91,7 @@ const LoginPage = () => {
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all transform active:scale-95"
+            onClick={handleLogin}
           >
             Log In
           </button>
@@ -109,10 +118,14 @@ const LoginPage = () => {
         </div>
 
         <p className="text-center text-gray-600 mt-8">
-          Don't have an account?{" "}
-          <a href="#" className="text-blue-600 font-bold hover:underline">
+          Don't have an account?
+          <Link
+            to="/signup"
+            className="text-blue-600 font-bold hover:underline"
+          >
+            {" "}
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
