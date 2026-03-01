@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
       const savedUser = localStorage.getItem("blogUser");
       return savedUser ? JSON.parse(savedUser) : null;
     } catch (error) {
-      console.error("Auth initialization error:", error);
+      console.error("Authentication error:", error);
       return null;
     }
   });

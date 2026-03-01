@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../Context/AuthContext";
+// import { useAuth } from "../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AiOutlineMail,
@@ -7,21 +7,24 @@ import {
   AiOutlineGoogle,
   AiOutlineGithub,
 } from "react-icons/ai";
+import { userLogin } from "../Hooks/UserLogin";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, user } = useAuth();
+  const { mutate, isLoading, isSuccess } = userLogin();
   const navigate = useNavigate();
-  console.log(user);
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     // এখানে আপনার লগইন লজিক বা Firebase/Auth API কল করবেন
     // login({ name: "papon", email: "RRRRR@gmail.com" });
-    navigate("/");
-    navigate("/", { replace: true });
+    mutate({ email, password });
+    if (isSuccess) {
+      navigate("/");
+      navigate("/", { replace: true });
+    }
   };
 
   return (

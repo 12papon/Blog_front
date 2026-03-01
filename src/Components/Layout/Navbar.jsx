@@ -11,16 +11,30 @@ import {
 import { RiArrowDownSLine } from "react-icons/ri";
 import { Link } from "react-router";
 import { useAuth } from "../../Context/AuthContext";
+import { UserProfileMenuUpdate } from "../../Hooks/UserProfileMenuUpdate";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // মোবাইল মেনু স্টেট
-  const { user } = useAuth();
+  const { data: user } = UserProfileMenuUpdate();
+  const { logout, login } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [isProfileOpen, setIsProfileOpen] = useState(false); // প্রোফাইল ড্রপডাউন স্টেট
 
   // ইউজার লগইন করা আছে কি না তা চেক করার জন্য ডামি স্টেট (পরবর্তীতে আপনার Auth Logic বসাবেন)
-  const [isLoggedIn, setIsLoggedIn] = useState(user ? true : false);
-  console.log(isLoggedIn);
+  // const [isLoggedIn, setIsLoggedIn] = useState(user ? true : false);
+  // console.log(isLoggedIn);
+  const handleLogin = () => {
+    login(user);
+  };
+  const handleLogout = () => {
+    logout();
+    queryClient.removeQueries(["AuthUser"]);
+    navigate("/login");
+  };
 
   const menuItems = [
     { name: "Home", icon: <AiOutlineHome />, link: "/" },
@@ -59,7 +73,7 @@ const Navbar = () => {
 
           {/* ৩. ডান পাশে লগইন/প্রোফাইল */}
           <div className="hidden md:flex items-center relative">
-            {isLoggedIn ? (
+            {user ? (
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -94,7 +108,7 @@ const Navbar = () => {
                       </a>
                       <hr className="my-1 border-gray-100" />
                       <button
-                        onClick={() => setIsLoggedIn(false)}
+                        onClick={handleLogout}
                         className="w-full flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50"
                       >
                         <AiOutlineLogout /> Logout
@@ -144,12 +158,12 @@ const Navbar = () => {
             </a>
           ))}
           <hr />
-          {isLoggedIn ? (
+          {user ? (
             <div className="space-y-4">
               <div className="flex items-center gap-3 font-bold text-blue-600">
                 <img
                   src="https://via.placeholder.com"
-                  className="rounded-full"
+                  className="rounded-full text-red-500"
                   alt=""
                 />{" "}
                 My Account
@@ -162,7 +176,7 @@ const Navbar = () => {
                 <AiOutlineUser /> Profile
               </a>
               <button
-                onClick={() => setIsLoggedIn(false)}
+                onClick={handleLogout}
                 className="flex items-center gap-3 text-red-500 pl-2"
               >
                 {" "}
@@ -170,12 +184,12 @@ const Navbar = () => {
               </button>
             </div>
           ) : (
-            <button
-              onClick={() => setIsLoggedIn(true)}
+            <Link
+              to="/login"
               className="w-full bg-blue-600 text-white py-2 rounded-lg"
             >
               Login
-            </button>
+            </Link>
           )}
         </div>
       )}
