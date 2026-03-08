@@ -72,7 +72,7 @@ const Navbar = () => {
           </div>
 
           {/* ৩. ডান পাশে লগইন/প্রোফাইল */}
-          <div className="hidden md:flex items-center relative">
+          <div className="hidden md:flex items-center relative z-30">
             {user ? (
               <div className="relative">
                 <button
@@ -94,12 +94,12 @@ const Navbar = () => {
                   <>
                     <div onClick={() => setIsProfileOpen(!isProfileOpen)}></div>
                     <div className="absolute right-0 mt-3 w-48 bg-white border border-gray-100 rounded-md shadow-xl py-2 animate-fade-in-down">
-                      <a
-                        href="#"
+                      <Link
+                        to="/createpost"
                         className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-blue-50"
                       >
                         <AiOutlineUser /> Profile
-                      </a>
+                      </Link>
                       <a
                         href="#"
                         className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-blue-50"
@@ -168,13 +168,13 @@ const Navbar = () => {
                 />{" "}
                 My Account
               </div>
-              <a
-                href="#"
+              <Link
+                to="/createpost"
                 className="flex items-center gap-3 text-gray-600 pl-2"
               >
                 {" "}
                 <AiOutlineUser /> Profile
-              </a>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-3 text-red-500 pl-2"

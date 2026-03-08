@@ -8,6 +8,7 @@ import LoginPage from "../pages/LoginPage";
 import Blog from "../pages/Blog";
 import About from "../pages/About";
 import Signup from "../pages/Signup";
+import CreatePost from "../pages/CreatePost";
 
 export const router = createBrowserRouter([
   {
@@ -33,9 +34,7 @@ export const router = createBrowserRouter([
       // ৩. শুধুমাত্র যারা লগইন আছে তাদের জন্য (Private Guard)
       {
         element: <PrivateRoute />,
-        children: [
-          // { path: "profile", element: <Profile /> },
-        ],
+        children: [{ path: "createpost", element: <CreatePost /> }],
       },
     ],
   },
