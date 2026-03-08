@@ -3,15 +3,15 @@ import BlogCard from "../Components/Common/BlogCard";
 import TopPosts from "./TopPosts";
 import { AllPosts } from "../api/GetPost";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../Components/Common/Loader";
 
 const Blog = () => {
   // ধরুন এই ডেটা আপনার API থেকে আসছে
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["PostData"],
     queryFn: AllPosts,
   });
-  console.log(data);
-
+  if (isLoading) return <Loader />;
   // const allPosts = [
   //   {
   //     id: 1,

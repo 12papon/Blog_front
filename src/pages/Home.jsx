@@ -34,9 +34,12 @@ const Home = () => {
             >
               ব্লগ পড়া শুরু করুন
             </Link>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-blue-600 transition-all">
+            <Link
+              to="/createpost"
+              className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-blue-600 transition-all"
+            >
               নিজের ব্লগ লিখুন
-            </button>
+            </Link>
           </div>
         </div>
 

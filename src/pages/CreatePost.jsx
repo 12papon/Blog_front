@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Image as ImageIcon, X, Send, Type, AlignLeft } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { AllPost } from "../api/Post/Post";
+import { useAuth } from "../Context/AuthContext";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const [upFile, setupFile] = useState(null);
+  const { user } = useAuth();
+  console.log(user.email);
+  console.log(user.username);
 
   // ইমেজ প্রিভিউ হ্যান্ডলার
   const handleImageChange = (e) => {
@@ -38,6 +42,9 @@ const CreatePost = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("postImage", upFile);
+
+    formData.append("username", user.username);
+    formData.append("email", user.email);
     mutation.mutate(formData);
     setTitle("");
     setContent("");

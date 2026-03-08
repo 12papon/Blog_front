@@ -8,6 +8,7 @@ import {
   AiOutlineGithub,
 } from "react-icons/ai";
 import { userLogin } from "../Hooks/UserLogin";
+import LoginLoader from "../Components/Common/LoginLoader";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ const LoginPage = () => {
       navigate("/", { replace: true });
     }
   };
-
+  if (isLoading) return <LoginLoader />;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden p-8">
