@@ -66,8 +66,8 @@ const BlogDetails = () => {
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
           postId={id}
-          authName={user.username}
-          authEmail={user.email}
+          authName={user?.username}
+          authEmail={user?.email}
         />
       </div>
     </div>

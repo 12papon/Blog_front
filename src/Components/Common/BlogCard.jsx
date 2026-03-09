@@ -65,8 +65,8 @@ const BlogCard = ({ post }) => {
             isOpen={isPopupOpen}
             onClose={() => setIsPopupOpen(false)}
             postId={post._id}
-            authName={user.username}
-            authEmail={user.email}
+            authName={user?.username}
+            authEmail={user?.email}
           />
         </div>
 
